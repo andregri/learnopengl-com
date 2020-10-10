@@ -3,6 +3,10 @@
 
 #include <stdio.h>
 
+#include "Hello.h"
+#include "HelloTriangle.h"
+#include "HelloRectangle.h"
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -10,10 +14,22 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 }
 
 
-void processInput(GLFWwindow *window)
+void processInput(GLFWwindow *window, Hello * hellos[])
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
+
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
+		hellos[0]->Draw();
+
+	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+		hellos[1]->Draw();
 }
 
 
@@ -52,14 +68,20 @@ int main(void)
 
 	glViewport(0, 0, 800, 600);
 
+	HelloTriangle hello_triangle;
+	HelloRectangle hello_rectangle;
+
+	Hello * hellos[] = {&hello_triangle, &hello_rectangle};
+
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
-		processInput(window);
-
 		/* Render here */
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		processInput(window, hellos);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);

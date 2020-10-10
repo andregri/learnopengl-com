@@ -18,5 +18,32 @@
     <ClCompile Include="src\Application.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="src\HelloTriangle.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\Shader.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HelloRectangle.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\HelloTriangle.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\Shader.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelloRectangle.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hello.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shader\vertex.shader" />
+    <None Include="res\shader\fragment.shader" />
   </ItemGroup>
 </Project>
