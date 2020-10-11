@@ -129,19 +129,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\HelloRectangle.cpp" />
-    <ClCompile Include="src\HelloTriangle.cpp" />
+    <ClCompile Include="src\HelloTriangle\Exercise3.cpp" />
+    <ClCompile Include="src\HelloTriangle\Exercise2.cpp" />
+    <ClCompile Include="src\HelloTriangle\Exercise1.cpp" />
+    <ClCompile Include="src\HelloTriangle\HelloRectangle.cpp" />
+    <ClCompile Include="src\HelloTriangle\HelloTriangle.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\util\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Hello.h" />
-    <ClInclude Include="src\HelloRectangle.h" />
-    <ClInclude Include="src\HelloTriangle.h" />
+    <ClInclude Include="src\HelloTriangle\Exercise3.h" />
+    <ClInclude Include="src\HelloTriangle\Exercise2.h" />
+    <ClInclude Include="src\HelloTriangle\Exercise1.h" />
+    <ClInclude Include="src\HelloTriangle\Hello.h" />
+    <ClInclude Include="src\HelloTriangle\HelloRectangle.h" />
+    <ClInclude Include="src\HelloTriangle\HelloTriangle.h" />
     <ClInclude Include="src\util\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\fragment.shader" />
+    <None Include="res\shader\fragment_yellow.shader" />
     <None Include="res\shader\vertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

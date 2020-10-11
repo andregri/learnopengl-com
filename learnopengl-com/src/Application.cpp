@@ -3,9 +3,12 @@
 
 #include <stdio.h>
 
-#include "Hello.h"
-#include "HelloTriangle.h"
-#include "HelloRectangle.h"
+#include "HelloTriangle/Hello.h"
+#include "HelloTriangle/HelloTriangle.h"
+#include "HelloTriangle/HelloRectangle.h"
+#include "HelloTriangle/Exercise1.h"
+#include "HelloTriangle/Exercise2.h"
+#include "HelloTriangle/Exercise3.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -26,10 +29,19 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
-		hellos[0]->Draw();
+		hellos[0]->Draw(); // Hello Triangle
 
 	if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
-		hellos[1]->Draw();
+		hellos[1]->Draw(); // Hello Rectangle
+
+	if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+		hellos[2]->Draw(); // Exercise 1
+
+	if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+		hellos[3]->Draw(); // Exercise 2
+
+	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+		hellos[4]->Draw(); // Exercise 3
 }
 
 
@@ -70,8 +82,11 @@ int main(void)
 
 	HelloTriangle hello_triangle;
 	HelloRectangle hello_rectangle;
+	hello_triangle::Exercise1 exercise1;
+	hello_triangle::Exercise2 exercise2;
+	hello_triangle::Exercise3 exercise3;
 
-	Hello * hellos[] = {&hello_triangle, &hello_rectangle};
+	Hello * hellos[] = {&hello_triangle, &hello_rectangle, &exercise1, &exercise2, &exercise3};
 
 
 	/* Loop until the user closes the window */
