@@ -80,6 +80,7 @@
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\glew-2.1.0\lib\Release\Win32;$(SolutionDir)Dependencies\glfw-3.3.2.bin.WIN32\lib-vc2017;</AdditionalLibraryDirectories>
@@ -106,6 +107,7 @@
       <UndefinePreprocessorDefinitions>
       </UndefinePreprocessorDefinitions>
       <PreprocessorDefinitions>GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -129,6 +131,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GS-Shaders\Exercise3.cpp" />
+    <ClCompile Include="src\GS-Shaders\Exercise2.cpp" />
+    <ClCompile Include="src\GS-Shaders\Exercise1.cpp" />
+    <ClCompile Include="src\core\Shader.cpp" />
     <ClCompile Include="src\GS-Shaders\ColorAttribute.cpp" />
     <ClCompile Include="src\HelloTriangle\Exercise3.cpp" />
     <ClCompile Include="src\HelloTriangle\Exercise2.cpp" />
@@ -136,10 +142,14 @@
     <ClCompile Include="src\HelloTriangle\HelloRectangle.cpp" />
     <ClCompile Include="src\HelloTriangle\HelloTriangle.cpp" />
     <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\util\Shader.cpp" />
     <ClCompile Include="src\GS-Shaders\Uniforms.cpp" />
+    <ClCompile Include="src\util\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GS-Shaders\Exercise3.h" />
+    <ClInclude Include="src\GS-Shaders\Exercise2.h" />
+    <ClInclude Include="src\GS-Shaders\Exercise1.h" />
+    <ClInclude Include="src\core\Shader.h" />
     <ClInclude Include="src\GS-Shaders\ColorAttribute.h" />
     <ClInclude Include="src\HelloTriangle\Exercise3.h" />
     <ClInclude Include="src\HelloTriangle\Exercise2.h" />
@@ -147,14 +157,18 @@
     <ClInclude Include="src\HelloTriangle\Hello.h" />
     <ClInclude Include="src\HelloTriangle\HelloRectangle.h" />
     <ClInclude Include="src\HelloTriangle\HelloTriangle.h" />
-    <ClInclude Include="src\util\Shader.h" />
     <ClInclude Include="src\GS-Shaders\Uniforms.h" />
+    <ClInclude Include="src\util\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\fragment.shader" />
     <None Include="res\shader\fragment_colorattr.shader" />
     <None Include="res\shader\fragment_uniform.shader" />
     <None Include="res\shader\fragment_yellow.shader" />
+    <None Include="res\shader\output_position_vertex.shader" />
+    <None Include="res\shader\position_as_color_fragment.shader" />
+    <None Include="res\shader\right_shift_vertex.shader" />
+    <None Include="res\shader\upside_down_vertex.shader" />
     <None Include="res\shader\vertex.shader" />
     <None Include="res\shader\vertex_colorattr.shader" />
   </ItemGroup>

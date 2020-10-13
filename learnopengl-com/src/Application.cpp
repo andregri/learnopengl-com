@@ -11,6 +11,9 @@
 #include "HelloTriangle/Exercise3.h"
 #include "GS-Shaders/Uniforms.h"
 #include "GS-Shaders/ColorAttribute.h"
+#include "GS-Shaders/Exercise1.h"
+#include "GS-Shaders/Exercise2.h"
+#include "GS-Shaders/Exercise3.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -55,6 +58,24 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 	{
 		ColorAttribute color_attrib;
 		color_attrib.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)
+	{
+		getting_started::Exercise1 upside_down;
+		upside_down.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)
+	{
+		getting_started::Exercise2 horizontal_oscillation;
+		horizontal_oscillation.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS)
+	{
+		getting_started::Exercise3 color_as_vertex_position;
+		color_as_vertex_position.Draw();
 	}
 }
 

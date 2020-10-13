@@ -18,9 +18,6 @@
     <ClCompile Include="src\Application.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\Shader.cpp">
-      <Filter>File di origine</Filter>
-    </ClCompile>
     <ClCompile Include="src\HelloTriangle\HelloRectangle.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
@@ -42,11 +39,23 @@
     <ClCompile Include="src\GS-Shaders\ColorAttribute.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Shader.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\util\Shader.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GS-Shaders\Exercise1.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GS-Shaders\Exercise2.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GS-Shaders\Exercise3.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\util\Shader.h">
-      <Filter>File di intestazione</Filter>
-    </ClInclude>
     <ClInclude Include="src\HelloTriangle\Hello.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
@@ -71,6 +80,21 @@
     <ClInclude Include="src\GS-Shaders\ColorAttribute.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\Shader.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\Shader.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GS-Shaders\Exercise1.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GS-Shaders\Exercise2.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GS-Shaders\Exercise3.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\vertex.shader" />
@@ -79,5 +103,9 @@
     <None Include="res\shader\fragment_uniform.shader" />
     <None Include="res\shader\fragment_colorattr.shader" />
     <None Include="res\shader\vertex_colorattr.shader" />
+    <None Include="res\shader\upside_down_vertex.shader" />
+    <None Include="res\shader\right_shift_vertex.shader" />
+    <None Include="res\shader\position_as_color_fragment.shader" />
+    <None Include="res\shader\output_position_vertex.shader" />
   </ItemGroup>
 </Project>
