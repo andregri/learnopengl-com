@@ -36,6 +36,12 @@
     <ClCompile Include="src\HelloTriangle\Exercise3.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GS-Shaders\Uniforms.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GS-Shaders\ColorAttribute.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\util\Shader.h">
@@ -59,10 +65,19 @@
     <ClInclude Include="src\HelloTriangle\Exercise3.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="src\GS-Shaders\Uniforms.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GS-Shaders\ColorAttribute.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\vertex.shader" />
     <None Include="res\shader\fragment.shader" />
     <None Include="res\shader\fragment_yellow.shader" />
+    <None Include="res\shader\fragment_uniform.shader" />
+    <None Include="res\shader\fragment_colorattr.shader" />
+    <None Include="res\shader\vertex_colorattr.shader" />
   </ItemGroup>
 </Project>

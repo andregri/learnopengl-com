@@ -9,6 +9,8 @@
 #include "HelloTriangle/Exercise1.h"
 #include "HelloTriangle/Exercise2.h"
 #include "HelloTriangle/Exercise3.h"
+#include "GS-Shaders/Uniforms.h"
+#include "GS-Shaders/ColorAttribute.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -42,6 +44,18 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 
 	if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
 		hellos[4]->Draw(); // Exercise 3
+
+	if (glfwGetKey(window, GLFW_KEY_6) == GLFW_PRESS)
+	{
+		Uniforms uniforms;
+		uniforms.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
+	{
+		ColorAttribute color_attrib;
+		color_attrib.Draw();
+	}
 }
 
 
