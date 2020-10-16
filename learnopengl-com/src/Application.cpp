@@ -14,6 +14,8 @@
 #include "GS-Shaders/Exercise1.h"
 #include "GS-Shaders/Exercise2.h"
 #include "GS-Shaders/Exercise3.h"
+#include "GS-Textures/FirstTexture.h"
+#include "GS-Textures/MixTextures.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -27,11 +29,11 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
-	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE)
+	/*if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);*/
 
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
 		hellos[0]->Draw(); // Hello Triangle
@@ -76,6 +78,18 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 	{
 		getting_started::Exercise3 color_as_vertex_position;
 		color_as_vertex_position.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+	{
+		getting_started::FirstTexture wooden_container;
+		wooden_container.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		getting_started::MixTextures mix_textures;
+		mix_textures.Draw();
 	}
 }
 
@@ -122,7 +136,6 @@ int main(void)
 	hello_triangle::Exercise3 exercise3;
 
 	Hello * hellos[] = {&hello_triangle, &hello_rectangle, &exercise1, &exercise2, &exercise3};
-
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

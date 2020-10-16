@@ -44,9 +44,18 @@ namespace core
 		glUseProgram(m_ID);
 	}
 
+	void Shader::SetUniform1i(const std::string & name, int value)
+	{
+		int location = glGetUniformLocation(m_ID, name.c_str());
+		if (location != -1)
+			glUniform1i(location, value);
+		else
+			std::cout << "ERROR::UNIFORM::" << name << "::NOT_FOUND\n";
+	}
+
 	void Shader::SetUniform1f(const std::string & name, float value)
 	{
-		unsigned int location = glGetUniformLocation(m_ID, name.c_str());
+		int location = glGetUniformLocation(m_ID, name.c_str());
 		if (location != -1)
 			glUniform1f(location, value);
 		else
