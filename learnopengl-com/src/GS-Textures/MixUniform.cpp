@@ -1,4 +1,4 @@
-#include "MixTextures.h"
+#include "MixUniform.h"
 
 #include <GL/glew.h>
 #include "../vendor/stb_image/stb_image.h"
@@ -9,8 +9,8 @@
 namespace getting_started
 {
 
-	MixTextures::MixTextures(const std::string & fragment_path)
-		: m_ShaderProgram("res/shader/GS-Textures/first_texture_vertex.shader", fragment_path)
+	MixUniform::MixUniform(const std::string & fragment_path)
+		: m_ShaderProgram("res/shader/GS-Textures/first_texture_vertex.shader", fragment_path), m_Mix(0.2f)
 	{
 		glGenVertexArrays(1, &m_VAO);
 		glGenBuffers(1, &m_VBO);
@@ -26,12 +26,12 @@ namespace getting_started
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3*sizeof(float)));
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(unsigned int), (void*)(6 * sizeof(float)));
 		glEnableVertexAttribArray(2);
 
-		std::string paths[2] = {"res/textures/container.jpg", "res/textures/awesomeface.png"};
+		std::string paths[2] = { "res/textures/container.jpg", "res/textures/awesomeface.png" };
 		glGenTextures(2, m_Textures);
 		for (int i = 0; i < 2; ++i)
 		{
@@ -65,7 +65,7 @@ namespace getting_started
 	}
 
 
-	MixTextures::~MixTextures()
+	MixUniform::~MixUniform()
 	{
 		glDeleteBuffers(1, &m_VBO);
 		glDeleteBuffers(1, &m_EBO);
@@ -73,14 +73,22 @@ namespace getting_started
 		glDeleteVertexArrays(1, &m_VAO);
 	}
 
-	void MixTextures::Draw()
+	void MixUniform::Draw()
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_Textures[0]);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, m_Textures[1]);
+
 		m_ShaderProgram.Use();
+		m_ShaderProgram.SetUniform1f("mix_value", m_Mix);
 		glBindVertexArray(m_VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	}
+
+	float MixUniform::UpdatetMix(const float mix_value)
+	{
+		m_Mix = mix_value;
+		return m_Mix;
 	}
 }

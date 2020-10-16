@@ -8,20 +8,20 @@
 namespace getting_started
 {
 
-	class MixTextures
+	class WrappingMethods
 	{
 	public:
-		MixTextures(const std::string & fragment_path);
-		~MixTextures();
+		WrappingMethods(const std::string & fragment_path);
+		~WrappingMethods();
 		void Draw();
 
 	private:
 		const float m_Rectangle[32] = {
 			// Position			// Color		  // Texture coords
-			 0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
-			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 2.0f, 2.0f,
+			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 2.0f, 0.0f,
 			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-			-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f
+			-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 2.0f
 		};
 
 		const unsigned int m_Indices[6] = {

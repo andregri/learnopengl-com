@@ -1,4 +1,4 @@
-#include "MixTextures.h"
+#include "WrappingMethods.h"
 
 #include <GL/glew.h>
 #include "../vendor/stb_image/stb_image.h"
@@ -9,7 +9,7 @@
 namespace getting_started
 {
 
-	MixTextures::MixTextures(const std::string & fragment_path)
+	WrappingMethods::WrappingMethods(const std::string & fragment_path)
 		: m_ShaderProgram("res/shader/GS-Textures/first_texture_vertex.shader", fragment_path)
 	{
 		glGenVertexArrays(1, &m_VAO);
@@ -26,12 +26,12 @@ namespace getting_started
 
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3*sizeof(float)));
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(unsigned int), (void*)(6 * sizeof(float)));
 		glEnableVertexAttribArray(2);
 
-		std::string paths[2] = {"res/textures/container.jpg", "res/textures/awesomeface.png"};
+		std::string paths[2] = { "res/textures/container.jpg", "res/textures/awesomeface.png" };
 		glGenTextures(2, m_Textures);
 		for (int i = 0; i < 2; ++i)
 		{
@@ -42,13 +42,18 @@ namespace getting_started
 			if (data)
 			{
 				glBindTexture(GL_TEXTURE_2D, m_Textures[i]);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 				GLenum format = GL_RGB;
 				if (paths[i].find(".png") != std::string::npos)
+				{
 					format = GL_RGBA;
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+				}
+					
 				glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 				glGenerateMipmap(GL_TEXTURE_2D);
 			}
@@ -65,7 +70,7 @@ namespace getting_started
 	}
 
 
-	MixTextures::~MixTextures()
+	WrappingMethods::~WrappingMethods()
 	{
 		glDeleteBuffers(1, &m_VBO);
 		glDeleteBuffers(1, &m_EBO);
@@ -73,7 +78,7 @@ namespace getting_started
 		glDeleteVertexArrays(1, &m_VAO);
 	}
 
-	void MixTextures::Draw()
+	void WrappingMethods::Draw()
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_Textures[0]);

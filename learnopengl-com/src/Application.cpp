@@ -16,13 +16,17 @@
 #include "GS-Shaders/Exercise3.h"
 #include "GS-Textures/FirstTexture.h"
 #include "GS-Textures/MixTextures.h"
+#include "GS-Textures/WrappingMethods.h"
+#include "GS-Textures/Exercise3.h"
+#include "GS-Textures/MixUniform.h"
 
+#define global_variable static
+global_variable float mix_value;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
-
 
 void processInput(GLFWwindow *window, Hello * hellos[])
 {
@@ -88,8 +92,37 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		getting_started::MixTextures mix_textures;
+		getting_started::MixTextures mix_textures("res/shader/GS-Textures/mix_textures_fragment.shader");
 		mix_textures.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+	{
+		getting_started::MixTextures mix_textures("res/shader/GS-Textures/mix_textures_flip_horizontally_fragment.shader");
+		mix_textures.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+	{
+		getting_started::WrappingMethods wrapping_methods("res/shader/GS-Textures/mix_textures_fragment.shader");
+		wrapping_methods.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+	{
+		getting_started_texture::Exercise3 exercise3("res/shader/GS-Textures/mix_textures_fragment.shader");
+		exercise3.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+	{
+		getting_started::MixUniform mix_uniform("res/shader/GS-Textures/mix_uniform_fragment.shader");
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+			mix_value -= 0.05f;
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+			mix_value += 0.05f;
+		printf("mix value: %f\n", mix_uniform.UpdatetMix(mix_value));
+		mix_uniform.Draw();
 	}
 }
 

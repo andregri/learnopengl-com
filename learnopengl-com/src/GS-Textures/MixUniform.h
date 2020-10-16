@@ -8,12 +8,13 @@
 namespace getting_started
 {
 
-	class MixTextures
+	class MixUniform
 	{
 	public:
-		MixTextures(const std::string & fragment_path);
-		~MixTextures();
+		MixUniform(const std::string & fragment_path);
+		~MixUniform();
 		void Draw();
+		float UpdatetMix(const float mix_value);
 
 	private:
 		const float m_Rectangle[32] = {
@@ -34,6 +35,7 @@ namespace getting_started
 		unsigned int m_VBO;
 		unsigned int m_EBO;
 		unsigned int m_Textures[2];
+		float m_Mix;
 	};
 
 }

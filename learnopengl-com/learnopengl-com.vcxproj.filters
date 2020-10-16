@@ -63,6 +63,15 @@
     <ClCompile Include="src\GS-Textures\MixTextures.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GS-Textures\WrappingMethods.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GS-Textures\Exercise3.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GS-Textures\MixUniform.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\HelloTriangle\Hello.h">
@@ -113,6 +122,15 @@
     <ClInclude Include="src\GS-Textures\MixTextures.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="src\GS-Textures\WrappingMethods.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GS-Textures\Exercise3.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GS-Textures\MixUniform.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\vertex.shader" />
@@ -128,6 +146,8 @@
     <None Include="res\shader\GS-Textures\first_texture_fragment.shader" />
     <None Include="res\shader\GS-Textures\first_texture_vertex.shader" />
     <None Include="res\shader\GS-Textures\mix_textures_fragment.shader" />
+    <None Include="res\shader\GS-Textures\mix_textures_flip_horizontally_fragment.shader" />
+    <None Include="res\shader\GS-Textures\mix_uniform_fragment.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\awesomeface.png">
