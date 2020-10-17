@@ -1,7 +1,7 @@
 #include "FirstTexture.h"
 
 #include <GL/glew.h>
-#include "../vendor/stb_image/stb_image.h"
+#include <stb_image/stb_image.h>
 
 #include <iostream>
 
@@ -67,6 +67,7 @@ namespace getting_started
 
 	void FirstTexture::Draw()
 	{
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_Texture);
 		m_ShaderProgram.Use();
 		glBindVertexArray(m_VAO);

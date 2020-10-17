@@ -1,7 +1,7 @@
 #include "WrappingMethods.h"
 
 #include <GL/glew.h>
-#include "../vendor/stb_image/stb_image.h"
+#include <stb_image/stb_image.h>
 
 #include <iostream>
 #include <string>
