@@ -75,6 +75,9 @@
     <ClCompile Include="src\vendor\glm\detail\glm.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GS-Transformations\RotateScale.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\HelloTriangle\Hello.h">
@@ -980,6 +983,9 @@
     <ClInclude Include="src\vendor\glm\vector_relational.hpp">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="src\GS-Transformations\RotateScale.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\vertex.shader" />
@@ -1405,6 +1411,8 @@
     <None Include="src\vendor\glm\gtx\wrap.inl">
       <Filter>File di intestazione</Filter>
     </None>
+    <None Include="res\shader\GS-Transformations\transformation_vertex.shader" />
+    <None Include="res\shader\GS-Transformations\transformation_fragment.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\awesomeface.png">

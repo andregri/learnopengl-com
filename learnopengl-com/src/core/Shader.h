@@ -13,8 +13,9 @@ namespace core
 		~Shader();
 		void Use();
 
-		void SetUniform1i(const std::string & name, int value);
-		void SetUniform1f(const std::string & name, float value);
+		void SetUniform1i(const std::string & name, const int value);
+		void SetUniform1f(const std::string & name, const float value);
+		void SetUniformMatrix4fv(const std::string & name, const float * matrix);
 
 	private:
 		unsigned int m_ID;

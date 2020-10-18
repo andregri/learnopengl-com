@@ -19,6 +19,7 @@
 #include "GS-Textures/WrappingMethods.h"
 #include "GS-Textures/Exercise3.h"
 #include "GS-Textures/MixUniform.h"
+#include "GS-Transformations/RotateScale.h"
 
 #define global_variable static
 global_variable float mix_value;
@@ -123,6 +124,12 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 			mix_value += 0.05f;
 		printf("mix value: %f\n", mix_uniform.UpdatetMix(mix_value));
 		mix_uniform.Draw();
+	}
+	
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+	{
+		getting_started::RotateScale rotate_and_scale;
+		rotate_and_scale.Draw();
 	}
 }
 
