@@ -20,6 +20,7 @@
 #include "GS-Textures/Exercise3.h"
 #include "GS-Textures/MixUniform.h"
 #include "GS-Transformations/RotateScale.h"
+#include "GS-Transformations/RotateOverTime.h"
 
 #define global_variable static
 global_variable float mix_value;
@@ -130,6 +131,26 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 	{
 		getting_started::RotateScale rotate_and_scale;
 		rotate_and_scale.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
+	{
+		getting_started::RotateOverTime rotate_over_time;
+		rotate_over_time.Update();
+		rotate_over_time.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS)
+	{
+		getting_started::RotateOverTime rotate_over_time;
+		rotate_over_time.UpdateExercise1();
+		rotate_over_time.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+	{
+		getting_started::RotateOverTime rotate_two_containers;
+		rotate_two_containers.DrawExercise2();
 	}
 }
 
