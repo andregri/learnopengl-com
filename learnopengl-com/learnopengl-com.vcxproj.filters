@@ -81,6 +81,12 @@
     <ClCompile Include="src\GS-Transformations\RotateOverTime.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GS-CoordinateSystems\Going3D.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GS-CoordinateSystems\Cube.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\HelloTriangle\Hello.h">
@@ -990,6 +996,12 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="src\GS-Transformations\RotateOverTime.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GS-CoordinateSystems\Going3D.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GS-CoordinateSystems\Cube.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>

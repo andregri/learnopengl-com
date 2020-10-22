@@ -21,6 +21,8 @@
 #include "GS-Textures/MixUniform.h"
 #include "GS-Transformations/RotateScale.h"
 #include "GS-Transformations/RotateOverTime.h"
+#include "GS-CoordinateSystems/Going3D.h"
+#include "GS-CoordinateSystems/Cube.h"
 
 #define global_variable static
 global_variable float mix_value;
@@ -152,6 +154,30 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 		getting_started::RotateOverTime rotate_two_containers;
 		rotate_two_containers.DrawExercise2();
 	}
+
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		getting_started::Going3D going_3D;
+		going_3D.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		getting_started::Cube cube;
+		cube.Draw();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		getting_started::Cube cube;
+		cube.DrawMoreCubes();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+	{
+		getting_started::Cube cube;
+		cube.DrawExercise3();
+	}
 }
 
 
@@ -198,12 +224,14 @@ int main(void)
 
 	Hello * hellos[] = {&hello_triangle, &hello_rectangle, &exercise1, &exercise2, &exercise3};
 
+	glEnable(GL_DEPTH_TEST);
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		/* Render here */
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		processInput(window, hellos);
 
