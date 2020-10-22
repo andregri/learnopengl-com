@@ -1,5 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include <stdio.h>
 
@@ -26,6 +28,9 @@
 
 #define global_variable static
 global_variable float mix_value;
+global_variable glm::vec3 camera_pos = glm::vec3(0.0f, 0.0f, 3.0f);
+global_variable glm::vec3 camera_front = glm::vec3(0.0f, 0.0f, -1.0f);
+global_variable glm::vec3 camera_up = glm::vec3(0.0f, 1.0f, 0.0f);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -177,6 +182,31 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 	{
 		getting_started::Cube cube;
 		cube.DrawExercise3();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+	{
+		getting_started::Cube cube;
+		cube.DrawCircularMovingCamera();
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
+	{
+		glm::mat4 view;
+
+		const float cameraSpeed = 0.15f;
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+			camera_pos -= cameraSpeed * camera_front;
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+			camera_pos += cameraSpeed * camera_front;
+		if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+			camera_pos += glm::normalize(glm::cross(camera_front, camera_up)) * cameraSpeed;
+		if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+			camera_pos -= glm::normalize(glm::cross(camera_front, camera_up)) * cameraSpeed;
+
+		view = glm::lookAt(camera_pos, camera_pos + camera_front, camera_up);
+		getting_started::Cube control_camera;
+		control_camera.DrawControlCamera(view);
 	}
 }
 

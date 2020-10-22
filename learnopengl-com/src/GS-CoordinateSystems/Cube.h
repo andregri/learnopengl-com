@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core/Shader.h"
+#include <glm/glm.hpp>
 
 namespace getting_started
 {
@@ -13,6 +14,8 @@ namespace getting_started
 		void Draw();
 		void DrawMoreCubes();
 		void DrawExercise3();
+		void DrawCircularMovingCamera();
+		void DrawControlCamera(glm::mat4 view);
 
 	private:
 		const float m_Cube[180] = {
