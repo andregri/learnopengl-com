@@ -27,6 +27,8 @@
 #include "GS-CoordinateSystems/Cube.h"
 
 #define global_variable static
+global_variable float delta_time = 0.0f;
+global_variable float last_frame = 0.0f;
 global_variable float mix_value;
 global_variable glm::vec3 camera_pos = glm::vec3(0.0f, 0.0f, 3.0f);
 global_variable glm::vec3 camera_front = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -194,7 +196,7 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 	{
 		glm::mat4 view;
 
-		const float cameraSpeed = 0.15f;
+		const float cameraSpeed = 2.5f * delta_time;
 		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
 			camera_pos -= cameraSpeed * camera_front;
 		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
@@ -259,6 +261,11 @@ int main(void)
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
+		// per-frame time logic
+		float currentFrame = glfwGetTime();
+		delta_time = currentFrame - last_frame;
+		last_frame = currentFrame;
+
 		/* Render here */
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
