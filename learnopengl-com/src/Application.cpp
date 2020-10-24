@@ -33,10 +33,46 @@ global_variable float mix_value;
 global_variable glm::vec3 camera_pos = glm::vec3(0.0f, 0.0f, 3.0f);
 global_variable glm::vec3 camera_front = glm::vec3(0.0f, 0.0f, -1.0f);
 global_variable glm::vec3 camera_up = glm::vec3(0.0f, 1.0f, 0.0f);
+global_variable bool first_mouse;
+global_variable float mouse_lastX = 400, mouse_lastY = 300;
+global_variable float yaw = -90.0f, pitch = 0.0f;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+
+void mouse_callback(GLFWwindow * window, double xpos, double ypos)
+{
+	if (first_mouse)
+	{
+		mouse_lastX = xpos;
+		mouse_lastY = ypos;
+		first_mouse = false;
+	}
+
+	float xoffset = xpos - mouse_lastX;
+	float yoffset = mouse_lastY - ypos;
+	mouse_lastX = xpos;
+	mouse_lastY = ypos;
+
+	const float sensitivity = 0.1f;
+	xoffset *= sensitivity;
+	yoffset *= sensitivity;
+
+	yaw += xoffset;
+	pitch += yoffset;
+
+	if (pitch > 89.0f)
+		pitch = 89.0f;
+	if (pitch < -89.0f)
+		pitch = -89.0f;
+
+	glm::vec3 direction;
+	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	direction.y = sin(glm::radians(pitch));
+	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	camera_front = glm::normalize(direction);
 }
 
 void processInput(GLFWwindow *window, Hello * hellos[])
@@ -233,6 +269,9 @@ int main(void)
 	}
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPosCallback(window, mouse_callback);
 
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
