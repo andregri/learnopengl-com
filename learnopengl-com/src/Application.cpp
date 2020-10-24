@@ -36,10 +36,20 @@ global_variable glm::vec3 camera_up = glm::vec3(0.0f, 1.0f, 0.0f);
 global_variable bool first_mouse;
 global_variable float mouse_lastX = 400, mouse_lastY = 300;
 global_variable float yaw = -90.0f, pitch = 0.0f;
+global_variable float zoom = 45.0f;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+
+void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
+{
+	zoom -= (float)yoffset;
+	if (zoom < 1.0f)
+		zoom = 1.0f;
+	if (zoom > 45.0f)
+		zoom = 45.0f;
 }
 
 void mouse_callback(GLFWwindow * window, double xpos, double ypos)
@@ -244,7 +254,8 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 
 		view = glm::lookAt(camera_pos, camera_pos + camera_front, camera_up);
 		getting_started::Cube control_camera;
-		control_camera.DrawControlCamera(view);
+		control_camera.DrawControlCamera(view, zoom);
+		printf("%f\n", zoom);
 	}
 }
 
@@ -272,6 +283,7 @@ int main(void)
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glfwSetCursorPosCallback(window, mouse_callback);
+	glfwSetScrollCallback(window, scroll_callback);
 
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);

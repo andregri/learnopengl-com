@@ -233,7 +233,7 @@ namespace getting_started
 		}
 	}
 
-	void Cube::DrawControlCamera(glm::mat4 view)
+	void Cube::DrawControlCamera(glm::mat4 view, const float fov)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, m_Textures[0]);
@@ -247,7 +247,7 @@ namespace getting_started
 		glm::mat4 model = glm::mat4(1.0f);
 		
 		glm::mat4 projection = glm::mat4(1.0f);
-		projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+		projection = glm::perspective(glm::radians(fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
 		glm::mat4 transform = projection * view * model;
 		m_ShaderProgram.SetUniformMatrix4fv("transform", glm::value_ptr(transform));

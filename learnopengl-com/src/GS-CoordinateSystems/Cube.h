@@ -15,7 +15,7 @@ namespace getting_started
 		void DrawMoreCubes();
 		void DrawExercise3();
 		void DrawCircularMovingCamera();
-		void DrawControlCamera(glm::mat4 view);
+		void DrawControlCamera(glm::mat4 view, const float fov);
 
 	private:
 		const float m_Cube[180] = {
