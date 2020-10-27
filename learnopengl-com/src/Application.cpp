@@ -25,18 +25,21 @@
 #include "GS-Transformations/RotateOverTime.h"
 #include "GS-CoordinateSystems/Going3D.h"
 #include "GS-CoordinateSystems/Cube.h"
+#include "GS-CoordinateSystems/ControlCamera.h"
 
 #define global_variable static
 global_variable float delta_time = 0.0f;
 global_variable float last_frame = 0.0f;
 global_variable float mix_value;
-global_variable glm::vec3 camera_pos = glm::vec3(0.0f, 0.0f, 3.0f);
+global_variable glm::vec3 camera_pos = glm::vec3(0.0f, 0.0f, 0.0f);
 global_variable glm::vec3 camera_front = glm::vec3(0.0f, 0.0f, -1.0f);
 global_variable glm::vec3 camera_up = glm::vec3(0.0f, 1.0f, 0.0f);
 global_variable bool first_mouse;
 global_variable float mouse_lastX = 400, mouse_lastY = 300;
 global_variable float yaw = -90.0f, pitch = 0.0f;
 global_variable float zoom = 45.0f;
+
+global_variable core::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), core::YAW, core::PITCH);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -50,6 +53,8 @@ void scroll_callback(GLFWwindow * window, double xoffset, double yoffset)
 		zoom = 1.0f;
 	if (zoom > 45.0f)
 		zoom = 45.0f;
+
+	camera.ProcessMouseScroll(yoffset);
 }
 
 void mouse_callback(GLFWwindow * window, double xpos, double ypos)
@@ -83,6 +88,8 @@ void mouse_callback(GLFWwindow * window, double xpos, double ypos)
 	direction.y = sin(glm::radians(pitch));
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 	camera_front = glm::normalize(direction);
+
+	camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 void processInput(GLFWwindow *window, Hello * hellos[])
@@ -255,7 +262,22 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 		view = glm::lookAt(camera_pos, camera_pos + camera_front, camera_up);
 		getting_started::Cube control_camera;
 		control_camera.DrawControlCamera(view, zoom);
-		printf("%f\n", zoom);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+	{
+		getting_started::ControlCamera control_camera;
+		
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+			camera.ProcessKeyboardFPS(core::BACKWARD, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+			camera.ProcessKeyboardFPS(core::FORWARD, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+			camera.ProcessKeyboardFPS(core::RIGHT, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+			camera.ProcessKeyboardFPS(core::LEFT, delta_time);
+		
+		control_camera.Draw(camera);
 	}
 }
 
