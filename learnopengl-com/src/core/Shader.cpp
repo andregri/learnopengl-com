@@ -62,6 +62,15 @@ namespace core
 			std::cout << "ERROR::UNIFORM::" << name << "::NOT_FOUND\n";
 	}
 
+	void Shader::SetUniformVec3f(const std::string & name, const float v0, const float v1, const float v2)
+	{
+		int location = glGetUniformLocation(m_ID, name.c_str());
+		if (location != -1)
+			glUniform3f(location, v0, v1, v2);
+		else
+			std::cout << "ERROR::UNIFORM::" << name << "NOT_FOUND\n";
+	}
+
 	void Shader::SetUniformMatrix4fv(const std::string & name, const float * matrix)
 	{
 		int location = glGetUniformLocation(m_ID, name.c_str());

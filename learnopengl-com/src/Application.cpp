@@ -26,6 +26,7 @@
 #include "GS-CoordinateSystems/Going3D.h"
 #include "GS-CoordinateSystems/Cube.h"
 #include "GS-CoordinateSystems/ControlCamera.h"
+#include "GS-Lighting/Lighting.h"
 
 #define global_variable static
 global_variable float delta_time = 0.0f;
@@ -278,6 +279,12 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 			camera.ProcessKeyboardFPS(core::LEFT, delta_time);
 		
 		control_camera.Draw(camera);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
+	{
+		getting_started::Lighting lighting;
+		lighting.Draw();
 	}
 }
 

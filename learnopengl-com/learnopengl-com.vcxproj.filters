@@ -93,6 +93,9 @@
     <ClCompile Include="src\GS-CoordinateSystems\ControlCamera.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GS-Lighting\Lighting.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\HelloTriangle\Hello.h">
@@ -1016,6 +1019,9 @@
     <ClInclude Include="src\GS-CoordinateSystems\ControlCamera.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="src\GS-Lighting\Lighting.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\vertex.shader" />
@@ -1443,6 +1449,9 @@
     </None>
     <None Include="res\shader\GS-Transformations\transformation_vertex.shader" />
     <None Include="res\shader\GS-Transformations\transformation_fragment.shader" />
+    <None Include="res\shader\GS-Lighting\vertex.shader" />
+    <None Include="res\shader\GS-Lighting\light_fragment.shader" />
+    <None Include="res\shader\GS-Lighting\object_fragment.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\awesomeface.png">
