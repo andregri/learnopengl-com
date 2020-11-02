@@ -106,5 +106,4 @@ namespace getting_started
 		glBindVertexArray(m_LightVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
-
 }
