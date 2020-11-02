@@ -10,7 +10,8 @@ namespace getting_started
 {
 
 	Lighting::Lighting()
-		: m_ShaderProgram("res/shader/GS-Lighting/vertex.shader", "res/shader/GS-Lighting/object_fragment.shader"),
+		: m_ShaderProgram("res/shader/GS-Lighting/ex4_vertex.shader", "res/shader/GS-Lighting/ex4_object_fragment.shader"), //Exercise4
+		//m_ShaderProgram("res/shader/GS-Lighting/vertex.shader", "res/shader/GS-Lighting/object_fragment.shader"),
 		m_LightingShader("res/shader/GS-Lighting/vertex.shader",  "res/shader/GS-Lighting/light_fragment.shader")
 	{
 		glGenVertexArrays(1, &m_VAO);
