@@ -1,6 +1,7 @@
 #include "Lighting.h"
 
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -61,7 +62,42 @@ namespace getting_started
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		m_LightingShader.Use();
-		model = glm::translate(glm::mat4(1.0f), lightPos);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, lightPos);
+		model = glm::scale(model, glm::vec3(0.2f));
+		m_LightingShader.SetUniformMatrix4fv("model", glm::value_ptr(model));
+		m_LightingShader.SetUniformMatrix4fv("view", glm::value_ptr(view));
+		m_LightingShader.SetUniformMatrix4fv("projection", glm::value_ptr(projection));
+
+		glBindVertexArray(m_LightVAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+
+	void Lighting::DrawEx1(core::Camera camera)
+	{
+		float radius = 2.0f;
+		float lightX = radius * cos((float)glfwGetTime());
+		float lightZ = radius * sin((float)glfwGetTime());
+		glm::vec3 lightPos(lightX, 1.0f, lightZ);
+
+		glm::mat4 model = glm::mat4(1.0f);
+		//glm::mat4 view = glm::lookAt(glm::vec3(2.0f, 1.0f, 5.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), 800.0f / 600.0f, 0.1f, 100.0f);
+
+		m_ShaderProgram.Use();
+		m_ShaderProgram.SetUniformMatrix4fv("model", glm::value_ptr(model));
+		m_ShaderProgram.SetUniformMatrix4fv("view", glm::value_ptr(view));
+		m_ShaderProgram.SetUniformMatrix4fv("projection", glm::value_ptr(projection));
+		m_ShaderProgram.SetUniformVec3f("lightPos", lightPos.x, lightPos.y, lightPos.z);
+		m_ShaderProgram.SetUniformVec3f("viewPos", camera.Position.x, camera.Position.y, camera.Position.z);
+
+		glBindVertexArray(m_VAO);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		m_LightingShader.Use();
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(lightX, lightPos.y, lightZ));
 		model = glm::scale(model, glm::vec3(0.2f));
 		m_LightingShader.SetUniformMatrix4fv("model", glm::value_ptr(model));
 		m_LightingShader.SetUniformMatrix4fv("view", glm::value_ptr(view));
