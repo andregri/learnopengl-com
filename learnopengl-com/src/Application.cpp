@@ -284,7 +284,17 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
 	{
 		getting_started::Lighting lighting;
-		lighting.Draw();
+
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::BACKWARD, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::FORWARD, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::RIGHT, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::LEFT, delta_time);
+
+		lighting.Draw(camera);
 	}
 }
 
