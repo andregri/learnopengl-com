@@ -68,7 +68,7 @@ namespace core
 		if (location != -1)
 			glUniform3f(location, v0, v1, v2);
 		else
-			std::cout << "ERROR::UNIFORM::" << name << "NOT_FOUND\n";
+			std::cout << "ERROR::UNIFORM::" << name << "::NOT_FOUND\n";
 	}
 
 	void Shader::SetUniformMatrix4fv(const std::string & name, const float * matrix)
@@ -77,6 +77,6 @@ namespace core
 		if (location != -1)
 			glUniformMatrix4fv(location, 1, GL_FALSE, matrix);
 		else
-			std::cout << "ERROR::UNIFORM::" << name << "NOT_FOUND\n";
+			std::cout << "ERROR::UNIFORM::" << name << "::NOT_FOUND\n";
 	}
 }

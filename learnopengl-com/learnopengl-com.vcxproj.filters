@@ -1454,6 +1454,7 @@
     <None Include="res\shader\GS-Lighting\object_fragment.shader" />
     <None Include="res\shader\GS-Lighting\ex4_object_fragment.shader" />
     <None Include="res\shader\GS-Lighting\ex4_vertex.shader" />
+    <None Include="res\shader\GS-Lighting\materials_fragment.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\awesomeface.png">

@@ -294,7 +294,8 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 		if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
 			camera.ProcessKeyboard(core::LEFT, delta_time);
 
-		lighting.DrawEx1(camera);
+		//lighting.DrawEx1(camera);
+		lighting.DrawMaterial(camera);
 	}
 }
 
