@@ -295,7 +295,7 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 			camera.ProcessKeyboard(core::LEFT, delta_time);
 
 		//lighting.DrawEx1(camera);
-		lighting.DrawMaterial(camera);
+		lighting.DrawCyanPlastic(camera);
 	}
 }
 

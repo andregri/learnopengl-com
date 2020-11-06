@@ -18,6 +18,8 @@ namespace getting_started
 		void Draw(core::Camera camera);
 		void DrawEx1(core::Camera camera);
 		void DrawMaterial(core::Camera camera);
+		void DrawMaterialChangingLightColor(core::Camera camera);
+		void DrawCyanPlastic(core::Camera camera);
 	
 	private:
 		float m_Cube[36*6] = {
