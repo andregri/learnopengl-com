@@ -23,6 +23,7 @@ namespace getting_started
 		unsigned int m_VBO;
 		unsigned int m_DiffuseMap;
 		unsigned int m_SpecularMap;
+		unsigned int m_EmissionMap;
 
 		const float m_Cube[288] = {
 			// positions          // normals           // texture coords

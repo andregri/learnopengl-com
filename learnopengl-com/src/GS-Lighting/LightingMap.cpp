@@ -1,6 +1,7 @@
 #include "LightingMap.h"
 
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -35,43 +36,67 @@ namespace getting_started
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
 
-		const char * diffusePath = "res/textures/container2.png";
+		const char * path = "res/textures/container2.png";
 		int width, height, num_channels;
 		stbi_set_flip_vertically_on_load(true);
-		unsigned char * data = stbi_load(diffusePath, &width, &height, &num_channels, 0);
+		unsigned char * data = stbi_load(path, &width, &height, &num_channels, 0);
 		if (data)
 		{
 			glGenTextures(1, &m_DiffuseMap);
 			glBindTexture(GL_TEXTURE_2D, m_DiffuseMap);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		}
 		else
 		{
-			std::cout << "ERROR::IMAGE::" << diffusePath << "::FAILED_LOADING\n";
+			std::cout << "ERROR::IMAGE::" << path << "::FAILED_LOADING\n";
 		}
 		stbi_image_free(data);
 
-		const char * specularPath = "res/textures/container2_specular.png";
-		data = stbi_load(diffusePath, &width, &height, &num_channels, 0);
+		path = "res/textures/container2_specular.png";
+		//path = "res/textures/lighting_maps_specular_color.png"; // Exercise3
+		data = stbi_load(path, &width, &height, &num_channels, 0);
 		if (data)
 		{
 			glGenTextures(1, &m_SpecularMap);
 			glBindTexture(GL_TEXTURE_2D, m_SpecularMap);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 		}
 		else
 		{
-			std::cout << "ERROR::IMAGE::" << specularPath << "::FAILED_LOADING\n";
+			std::cout << "ERROR::IMAGE::" << path << "::FAILED_LOADING\n";
+		}
+		stbi_image_free(data);
+		
+		// Exercise4: emission map
+		path = "res/textures/matrix.jpg";
+		data = stbi_load(path, &width, &height, &num_channels, 0);
+		if (data)
+		{
+			glGenTextures(1, &m_EmissionMap);
+			glBindTexture(GL_TEXTURE_2D, m_EmissionMap);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		}
+		else
+		{
+			std::cout << "ERROR::IMAGE::" << path << "::FAILED_LOADING\n";
 		}
 		stbi_image_free(data);
 	}
@@ -83,11 +108,13 @@ namespace getting_started
 		glDeleteVertexArrays(1, &m_LightVAO);
 		glDeleteBuffers(1, &m_VBO);
 		glDeleteTextures(1, &m_DiffuseMap);
+		glDeleteTextures(1, &m_SpecularMap);
+		glDeleteTextures(1, &m_EmissionMap);
 	}
 
 	void LightingMap::Draw(core::Camera camera)
 	{
-		glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
+		glm::vec3 lightPos = glm::vec3(-0.5f, 0.5f, 2.0f);
 		glm::mat4 view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), 800.0f / 600.0f, 0.1f, 100.0f);
 
@@ -99,9 +126,11 @@ namespace getting_started
 		m_ObjectShader.SetUniformMatrix4fv("projection", glm::value_ptr(projection));
 
 		m_ObjectShader.SetUniformVec3f("viewPos", camera.Position.x, camera.Position.y, camera.Position.z);
+		m_ObjectShader.SetUniform1f("time", glfwGetTime());
 
 		m_ObjectShader.SetUniform1i("material.diffuse", 0);  // set diffuse map
-		m_ObjectShader.SetUniform1i("material.specular", 1);
+		m_ObjectShader.SetUniform1i("material.specular", 1); // set specular map
+		m_ObjectShader.SetUniform1i("material.emission", 2); // set emission map
 		m_ObjectShader.SetUniform1f("material.shininess", 64.0f);
 
 		m_ObjectShader.SetUniformVec3f("light.position", lightPos.x, lightPos.y, lightPos.z);
@@ -116,6 +145,10 @@ namespace getting_started
 		// bind specular map
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, m_SpecularMap);
+
+		// bind emission map
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, m_EmissionMap);
 
 		// render the cube
 		glBindVertexArray(m_ObjVAO);

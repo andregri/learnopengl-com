@@ -1478,5 +1478,11 @@
     <Image Include="res\textures\container2_specular.png">
       <Filter>File di risorse</Filter>
     </Image>
+    <Image Include="res\textures\lighting_maps_specular_color.png">
+      <Filter>File di risorse</Filter>
+    </Image>
+    <Image Include="res\textures\matrix.jpg">
+      <Filter>File di risorse</Filter>
+    </Image>
   </ItemGroup>
 </Project>
