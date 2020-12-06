@@ -30,6 +30,7 @@
 #include "GS-Lighting/LightingMap.h"
 #include "GS-Lighting/LightingCaster.h"  // directional light
 #include "GS-Lighting/LightCaster_PointLight.h"
+#include "GS-Lighting/LightCaster_Spotlight.h"
 
 
 #define global_variable static
@@ -348,6 +349,22 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 			camera.ProcessKeyboard(core::LEFT, delta_time);
 
 		lighting_caster_point_light.Draw(camera);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
+	{
+		getting_started::LightCaster_Spotlight lighting_caster_spotlight;
+
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::BACKWARD, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::FORWARD, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::RIGHT, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::LEFT, delta_time);
+
+		lighting_caster_spotlight.Draw(camera);
 	}
 }
 

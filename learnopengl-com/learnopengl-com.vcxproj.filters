@@ -105,6 +105,9 @@
     <ClCompile Include="src\GS-Lighting\LightCaster_PointLight.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
+    <ClCompile Include="src\GS-Lighting\LightCaster_Spotlight.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\HelloTriangle\Hello.h">
@@ -1040,6 +1043,9 @@
     <ClInclude Include="src\GS-Lighting\LightCaster_PointLight.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="src\GS-Lighting\LightCaster_Spotlight.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shader\vertex.shader" />
@@ -1478,6 +1484,7 @@
     <None Include="res\shader\GS-Lighting\lm_light_fragment.shader" />
     <None Include="res\shader\GS-Lighting\lc_obj_fragment.shader" />
     <None Include="res\shader\GS-Lighting\lc_pl_obj_fragment.shader" />
+    <None Include="res\shader\GS-Lighting\lc_spot_obj_fragment.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\awesomeface.png">
