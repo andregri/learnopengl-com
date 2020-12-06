@@ -28,6 +28,7 @@
 #include "GS-CoordinateSystems/ControlCamera.h"
 #include "GS-Lighting/Lighting.h"
 #include "GS-Lighting/LightingMap.h"
+#include "GS-Lighting/LightingCaster.h"
 
 #define global_variable static
 global_variable float delta_time = 0.0f;
@@ -313,6 +314,22 @@ void processInput(GLFWwindow *window, Hello * hellos[])
 			camera.ProcessKeyboard(core::LEFT, delta_time);
 
 		lighting_map.Draw(camera);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
+	{
+		getting_started::LightingCaster lighting_caster;
+
+		if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::BACKWARD, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::FORWARD, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::RIGHT, delta_time);
+		if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+			camera.ProcessKeyboard(core::LEFT, delta_time);
+
+		lighting_caster.Draw(camera);
 	}
 }
 
